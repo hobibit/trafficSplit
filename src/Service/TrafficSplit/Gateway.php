@@ -39,6 +39,19 @@ class Gateway
         $gatewayController = new GatewayController();
         $response = $gatewayController->getTraficLoad($this->name);
         $content = json_decode($response->getContent(), true);
+
+        if (isset($content['error'])) {
+            throw new \Exception($content['error']);
+        }
+
+        if (!isset($content['load'])) {
+            throw new \Exception('No traffic load');
+        }
+
+        if (!is_numeric($content['load'])) {
+            throw new \Exception('Not a number');
+        }
+
         return $content['load'];
     }
 }
