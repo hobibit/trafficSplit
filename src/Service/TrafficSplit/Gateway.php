@@ -35,7 +35,6 @@ class Gateway
 
     public function getTrafficLoad(): int
     {
-        //TO DO ERROR
         $gatewayController = new GatewayController();
         $response = $gatewayController->getTraficLoad($this->name);
         $content = json_decode($response->getContent(), true);
